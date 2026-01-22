@@ -9,7 +9,7 @@ services:
     name: ai-query-api-gateway
     env: python
     region: oregon
-    plan: starter
+    plan: free
     buildCommand: pip install -r services/api-gateway/requirements.txt
     startCommand: uvicorn services.api-gateway.app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
@@ -40,7 +40,7 @@ services:
         value: INFO
       - key: RATE_LIMIT_PER_MINUTE
         value: 100
-    
+
   # ==========================================
   # Query Validator Service
   # ==========================================
@@ -48,7 +48,7 @@ services:
     name: ai-query-validator
     env: python
     region: oregon
-    plan: starter
+    plan: free
     buildCommand: pip install -r services/query-validator/requirements.txt
     startCommand: uvicorn services.query-validator.app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
@@ -61,7 +61,7 @@ services:
         value: ai_query_generator
       - key: LOG_LEVEL
         value: INFO
-    
+
   # ==========================================
   # Query Executor Service
   # ==========================================
@@ -69,7 +69,7 @@ services:
     name: ai-query-executor
     env: python
     region: oregon
-    plan: starter
+    plan: free
     buildCommand: pip install -r services/query-executor/requirements.txt
     startCommand: uvicorn services.query-executor.app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
