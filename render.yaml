@@ -10,9 +10,9 @@ services:
     env: docker
     region: oregon
     plan: free
-    dockerfilePath: services/api-gateway/Dockerfile
+    dockerfilePath: Dockerfile.api-gateway
     dockerContext: .
-    startCommand: uvicorn services.api-gateway.app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: ENVIRONMENT
@@ -50,9 +50,9 @@ services:
     env: docker
     region: oregon
     plan: free
-    dockerfilePath: services/query-validator/Dockerfile
+    dockerfilePath: Dockerfile.query-validator
     dockerContext: .
-    startCommand: uvicorn services.query-validator.app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: ENVIRONMENT
@@ -72,9 +72,9 @@ services:
     env: docker
     region: oregon
     plan: free
-    dockerfilePath: services/query-executor/Dockerfile
+    dockerfilePath: Dockerfile.query-executor
     dockerContext: .
-    startCommand: uvicorn services.query-executor.app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: ENVIRONMENT
