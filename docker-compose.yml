@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  api-gateway:
+    build: ./services/api-gateway
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=development
+      - MONGODB_URI=${MONGODB_URI}
+      - MONGODB_DATABASE=ai_query_generator_dev
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - LLM_PROVIDER=google_gemini
+      - VALIDATOR_SERVICE_URL=http://query-validator:8000
+      - EXECUTOR_SERVICE_URL=http://query-executor:8000
+      - JWT_SECRET_KEY=dev_secret_key_change_in_prod
+      - LOG_LEVEL=DEBUG
+    depends_on:
+      - query-validator
+      - query-executor
+    volumes:
+      - ./services/api-gateway/app:/app/app
+
+  query-validator:
+    build: ./services/query-validator
+    ports:
+      - "8001:8000"
+    environment:
+      - ENVIRONMENT=development
+      - MONGODB_URI=${MONGODB_URI}
+      - MONGODB_DATABASE=ai_query_generator_dev
+      - LOG_LEVEL=DEBUG
+    volumes:
+      - ./services/query-validator/app:/app/app
+
+  query-executor:
+    build: ./services/query-executor
+    ports:
+      - "8002:8000"
+    environment:
+      - ENVIRONMENT=development
+      - MONGODB_URI=${MONGODB_URI}
+      - MONGODB_DATABASE=ai_query_generator_dev
+      - LOG_LEVEL=DEBUG
+    volumes:
+      - ./services/query-executor/app:/app/app
