@@ -12,7 +12,7 @@ This is an AI-driven tool that converts natural language descriptions into Mongo
 - **Environment Setup**: Configure MongoDB connection and AI API keys
 - **Testing**: Use embedded test database for query validation
 - **Debugging**: Log generated queries and execution results for troubleshooting
-- **Deployment**: Use Docker builds on Render to handle Rust dependencies (langchain packages require compilation)
+- **Deployment**: Use Docker builds on Render to handle Rust dependencies (langchain packages require compilation). Dockerfiles must be in repository root with dockerContext: .
 
 ## Code Patterns
 - **Error Handling**: Wrap MongoDB operations in try-catch with specific error types
