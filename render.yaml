@@ -7,10 +7,11 @@ services:
   # ==========================================
   - type: web
     name: ai-query-api-gateway
-    env: python
+    env: docker
     region: oregon
     plan: free
-    buildCommand: pip install -r services/api-gateway/requirements.txt
+    dockerfilePath: services/api-gateway/Dockerfile
+    dockerContext: .
     startCommand: uvicorn services.api-gateway.app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
@@ -46,10 +47,11 @@ services:
   # ==========================================
   - type: web
     name: ai-query-validator
-    env: python
+    env: docker
     region: oregon
     plan: free
-    buildCommand: pip install -r services/query-validator/requirements.txt
+    dockerfilePath: services/query-validator/Dockerfile
+    dockerContext: .
     startCommand: uvicorn services.query-validator.app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
@@ -67,10 +69,11 @@ services:
   # ==========================================
   - type: web
     name: ai-query-executor
-    env: python
+    env: docker
     region: oregon
     plan: free
-    buildCommand: pip install -r services/query-executor/requirements.txt
+    dockerfilePath: services/query-executor/Dockerfile
+    dockerContext: .
     startCommand: uvicorn services.query-executor.app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
